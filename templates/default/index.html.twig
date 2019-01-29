@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        #additional_fields { display: none }
+    </style>
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="py-5 text-center">
@@ -11,7 +17,7 @@
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your result</span>
                 </h4>
-                <pre class="card"><code id="result">qweqwe</code></pre>
+                <code id="result"></code>
             </div>
             <div class="col-md-8 order-md-1">
                 <form class="needs-validation" id="api" novalidate>
@@ -27,22 +33,69 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="path">Path</label>
-                            <input type="text" class="form-control" id="path" name="path" placeholder="/api/users/">
+                            <input type="text" class="form-control" id="path" name="path" placeholder="/api/users" required value="/api/users">
                         </div>
                     </div>
 
-
-                    <div class="row">
+                    <div class="row" id="additional_fields">
                         <div class="col-md-9">
-                            <label for="path">Request Parameters</label>
-                            <input type="email" class="form-control" id="path" name="path" placeholder="/api/users/">
+                            <label for="phone">Phone <span class="text-muted">(Only for POST and PUT)</span></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+380730426813">
+                            <label for="name">Name <span class="text-muted">(Only for POST and PUT)</span></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Oleg Voloshyn">
                         </div>
                     </div>
 
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Send</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">Send</button>
                 </form>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        $('#method').change(function(e) {
+            let method = $(this).val();
+            if (method === 'POST' || method === 'PUT') {
+                $('#additional_fields').show();
+            } else {
+                $('#additional_fields').hide();
+            }
+        });
+
+        $('form#api').submit(function(e) {
+            e.preventDefault();
+
+            let $form = $(this),
+                $submitButton = $('#submit'),
+                $methodElem = $('select[name="method"]', $form),
+                $pathElem = $('input[name="path"]', $form);
+
+            $.ajax({
+                method: $methodElem.val(),
+                url: $pathElem.val(),
+                dataType: 'text',
+                data: {'phone' : $('#phone').val(), 'name': $('#name').val()},
+                beforeSend: function() {
+                    $submitButton.attr('disabled', 'disabled')
+                },
+                success: function(response) {
+                    console.log(response);
+                    $('#result').html(response)
+                },
+                error: function(response) {
+                    $('#result').html(response)
+                },
+                complete: function() {
+                    $submitButton.removeAttr('disabled')
+                },
+            });
+
+
+            return false;
+        });
+    </script>
 {% endblock %}
