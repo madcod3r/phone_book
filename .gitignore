@@ -1,3 +1,13 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+
 # IDEA config dir
 .idea
 
@@ -43,6 +53,7 @@
 
 # Composer PHAR
 /composer.phar
+/composer.bat
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
