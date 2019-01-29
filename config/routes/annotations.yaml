@@ -1,3 +1,13 @@
-controllers:
-    resource: ../../src/Controller/
+_welcome:
+    path: /
+    controller:    App\Controller\Web\DefaultController::index
+
+web_controllers:
+    resource: ../../src/Controller/Web
     type: annotation
+    prefix: /
+
+rest_controllers:
+    resource: ../../src/Controller/Rest
+    type: annotation
+    prefix: /api

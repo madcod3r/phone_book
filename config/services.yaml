@@ -21,8 +21,12 @@ services:
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
-        resource: '../src/Controller'
+        resource: '../src/Controller/{Web,Rest}'
         tags: ['controller.service_arguments']
+
+    app.user_service:
+        class: App\Service\UserService
+        arguments: ['@doctrine.orm.entity_manager']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
