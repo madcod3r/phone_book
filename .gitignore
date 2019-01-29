@@ -25,7 +25,7 @@
 /var/log/*
 /var/sessions/*
 !var/cache/.gitkeep
-!var/logs/.gitkeep
+!var/log/.gitkeep
 !var/sessions/.gitkeep
 
 # Parameters
