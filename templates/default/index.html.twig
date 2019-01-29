@@ -1,6 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Phone Book Application API Form<h1>
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Phone Book Application API Form</h2>
+        </div>
 
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Your result</span>
+                </h4>
+                <pre class="card"><code id="result">qweqwe</code></pre>
+            </div>
+            <div class="col-md-8 order-md-1">
+                <form class="needs-validation" id="api" novalidate>
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <label for="method">API method</label>
+                            <select class="custom-select d-block w-100" name="method" id="method" required>
+                                <option>GET</option>
+                                <option>POST</option>
+                                <option>PUT</option>
+                                <option>DELETE</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="path">Path</label>
+                            <input type="text" class="form-control" id="path" name="path" placeholder="/api/users/">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <label for="path">Request Parameters</label>
+                            <input type="email" class="form-control" id="path" name="path" placeholder="/api/users/">
+                        </div>
+                    </div>
+
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
