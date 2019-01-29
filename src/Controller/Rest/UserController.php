@@ -2,15 +2,14 @@
 
 namespace App\Controller\Rest;
 
-use App\Entity\User;
 use App\Service\UserService;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends FOSRestController
+class UserController extends AbstractFOSRestController
 {
     /**
      * @var UserService
