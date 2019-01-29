@@ -9,7 +9,7 @@
 /phpunit.xml
 
 # IDEA config dir
-.idea
+.idea/
 
 # Cache and logs (Symfony2)
 /app/cache/*
